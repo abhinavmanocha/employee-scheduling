@@ -1,11 +1,26 @@
 <script>
+    import { Router, Route } from "svelte-routing";
+    import Modal from "./components/Modal/Modal.svelte";
 
+    import Home from "./components/Home.svelte";
+    import PageNotFound from "./components/Views/PageNotFound.svelte";
+    import Login from "./components/Authorization/Login.svelte";
+
+    export let url = "";
 </script>
 
-<main>
+<Router {url}>
+    <Route path="/">
+        <Modal>
+            <Home title="Home | Employee Scheduling" />
+        </Modal>
+    </Route>
 
-</main>
+    <Route path="login">
+        <Login />
+    </Route>
 
-<style>
-	
-</style>
+    <Route path="*">
+        <PageNotFound title="404 Page not Found | Employee Scheduling" />
+    </Route>
+</Router>
