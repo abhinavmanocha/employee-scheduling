@@ -230,13 +230,13 @@
         right: 1rem;
         margin: 0;
         padding: 0;
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 2rem;
+        height: 2rem;
         border: 0;
-        color: black;
-        border-radius: 1.5rem;
+        color: #2196f3;
+        border-radius: 2rem;
         background: white;
-        box-shadow: 0 0 0 1px black;
+        box-shadow: 0 0 0 3px #2196f3;
         transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1),
             background 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
         -webkit-appearance: none;
@@ -249,9 +249,9 @@
         box-sizing: border-box;
         position: absolute;
         top: 50%;
-        width: 1rem;
+        width: 1.5rem;
         height: 1px;
-        background: black;
+        background: #2196f3;
         transform-origin: center;
         transition: height 0.2s cubic-bezier(0.25, 0.1, 0.25, 1),
             background 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -262,7 +262,7 @@
         -moz-transform: translate(0, -50%) rotate(45deg);
         transform: translate(0, -50%) rotate(45deg);
         left: 0.25rem;
-        height: 2px;
+        height: 3px;
     }
 
     .close:after {
@@ -270,11 +270,14 @@
         -moz-transform: translate(0, -50%) rotate(-45deg);
         transform: translate(0, -50%) rotate(-45deg);
         left: 0.25rem;
-        height: 2px;
+        height: 3px;
     }
 
     .close:hover {
         transform: rotate(180deg);
+        box-shadow: 0 0 0 4px #2196f3;
+        transition: 250ms ease-in;
+        cursor: pointer;
     }
 
     .close:hover:before,
@@ -283,7 +286,7 @@
     }
 
     .close:active {
-        transform: scale(0.9);
+        transform: scale(0.85);
     }
 
     .close:hover,

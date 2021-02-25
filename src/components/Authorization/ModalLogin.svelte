@@ -1,9 +1,13 @@
 <script>
-    import { navigate } from "svelte-routing";
-    import LoginForm from "./LoginForm.svelte";
-    import SignupForm from "./SignupForm.svelte";
+    import { Link } from "svelte-routing";
+    import { fade, fly } from "svelte/transition";
 
-    let currentView = LoginForm;
+    import SignupForm from "./SignupForm.svelte";
+    import LoginForm from "./LoginForm.svelte";
+
+    export let type;
+
+    let currentView = type;
 
     const signIn = () => {
         currentView = LoginForm;
@@ -18,9 +22,11 @@
     <title>Join Us! | Employee Scheduling</title>
 </svelte:head>
 
-<main class="container">
+<main class="container" in:fly="{{x: -500, duration: 1000}}" out:fade>
     <div class="container__logo">
-        <img src="" alt="Employee Scheduling app logo" />
+        <Link to="/">
+            <i class="far fa-calendar-alt" />
+        </Link>
     </div>
     <nav class="container__nav">
         <span class="container__nav--bttn" on:click={signIn}>Sign in</span>
@@ -41,8 +47,9 @@
     }
 
     .container__nav {
-        display: inline-flex;
-        position: relative;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
         overflow: hidden;
         max-width: 100%;
     }
@@ -54,9 +61,15 @@
         color: black;
         text-transform: uppercase;
         font-weight: 600;
-        margin: 1.5rem;
+        margin: 1.25rem 1.75rem;
     }
 
     .container__nav--bttn:hover {
+        color: black;
+    }
+
+    .container__logo {
+        font-size: 5rem;
+        filter: brightness(135%);
     }
 </style>

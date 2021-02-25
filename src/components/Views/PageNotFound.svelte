@@ -1,4 +1,6 @@
 <script>
+    import { Link } from "svelte-routing";
+
     export let title;
 </script>
 
@@ -7,7 +9,8 @@
 </svelte:head>
 
 <main>
-    Page not found 😥😥😥
+    <h1>Page not found 😥</h1>
+    Go back to <Link to="/">Home page</Link>
 </main>
 
 <style>
