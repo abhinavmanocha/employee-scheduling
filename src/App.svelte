@@ -7,6 +7,7 @@
     import Home from "./components/Routes/Home.svelte";
     import PageNotFound from "./components/Views/PageNotFound.svelte";
     import Login from "./components/Authorization/ModalLogin.svelte";
+    import RestorePassword from "./components/Routes/RestorePassword.svelte";
 
     export let url = "";
 </script>
@@ -20,11 +21,15 @@
 
     <ProtectedRoute path="/dashboard" component={Dashboard} />
 
+    <Route path="restore-password">
+        <RestorePassword title="Restore Password | Employee Scheduling" />
+    </Route>
+
     <Route path="login">
         <Login />
     </Route>
 
     <Route path="*">
-        <PageNotFound title="404 Page not Found | Employee Scheduling" />
+        <PageNotFound title="Page not Found | Employee Scheduling" />
     </Route>
 </Router>

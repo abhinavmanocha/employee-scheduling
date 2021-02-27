@@ -1,6 +1,6 @@
 <script>
     import { Route } from "svelte-routing";
-    import { logged, token } from "../stores";
+    import { token } from "../stores";
 
     import PageNotFound from "./Views/PageNotFound.svelte";
 
@@ -8,7 +8,6 @@
     export let component;
 
     $: isAuth = $token;
-    $: isLogged = $logged;
 </script>
 
 {#if isAuth}

@@ -1,5 +1,6 @@
 <script>
     import { fade, fly } from "svelte/transition";
+    import { isEmpty } from "../../utils/utils";
 
     import Input from "../Input.svelte";
     import Button from "./Button.svelte";
@@ -9,11 +10,34 @@
     let email = "";
     let pass = "";
     let passRepeat = "";
+    let data;
 
     let emailRegex = /\S+@\S+\.\S+/;
+
+    $: {
+        data = {
+            username: username,
+            email: email,
+            pass: pass,
+            name: "",
+            surname: "",
+            role: "user",
+        };
+    }
+
+    const registerUser = () => {
+        if (isEmpty(data)) {
+            return;
+        }
+
+        fetch(`http://localhost:8000/user`, {
+            method: "POST",
+            body: JSON.stringify(data),
+        });
+    };
 </script>
 
-<form class="register" in:fade={{duration: 500}}>
+<form class="register" in:fade={{ duration: 500 }}>
     <header class="register__header">
         <h1 class="register__title">Sign up</h1>
     </header>
@@ -30,7 +54,6 @@
         bind:value={username}
         type="text"
         autocomplete="on"
-        required
     />
 
     <Input
@@ -72,11 +95,12 @@
     {#if pass !== passRepeat && pass}
         <span class="register__error">Make sure both passwords matches</span>
     {/if}
-    <Button>Sign Up</Button>
+    <Button on:click={registerUser}>Sign Up</Button>
 </form>
 
 <style>
-    .register__header, h1 {
+    .register__header,
+    h1 {
         margin: 0 auto;
     }
 
