@@ -1,8 +1,8 @@
 <script>
     import { Link } from "svelte-routing";
 
-    import Input from "../Input.svelte";
-    import Button from "../Authorization/Button.svelte";
+    import Input from "../Form/Input.svelte";
+    import Button from "../Form/Button.svelte";
 
     export let title;
 
@@ -15,19 +15,19 @@
     <title>{title}</title>
 </svelte:head>
 
-<main class="restore">
+<section class="restore">
     <header class="restore__header">
         <i class="restore__header--logo far fa-calendar-alt" />
         <h4>Schede</h4>
     </header>
 
-    <section>
+    <div>
         <h2>Forgot your password?</h2>
         <p>
             Enter your email address and we will send you instructions to reset
             your email
         </p>
-    </section>
+    </div>
 
     <form action="POST" class="restore__form">
         <Input
@@ -43,7 +43,7 @@
     </form>
 
     <Link to="/">Back To Login</Link>
-</main>
+</section>
 
 <style>
     .restore {

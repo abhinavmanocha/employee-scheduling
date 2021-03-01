@@ -16,6 +16,7 @@
         background-color: #2196f3;
         cursor: pointer;
         text-transform: uppercase;
+        font-weight: 700;
         font-size: 0.8rem;
         letter-spacing: 0.2rem;
         transition: all 0.5s;
@@ -24,7 +25,7 @@
     }
 
 
-    .button:hover:before {
+    .button:hover::before {
         width: 100%;
     }
 </style>

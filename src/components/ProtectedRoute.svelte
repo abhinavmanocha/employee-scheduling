@@ -2,7 +2,7 @@
     import { Route } from "svelte-routing";
     import { token } from "../stores";
 
-    import PageNotFound from "./Views/PageNotFound.svelte";
+    import PageNotFound from "./Routes/PageNotFound.svelte";
 
     export let path;
     export let component;

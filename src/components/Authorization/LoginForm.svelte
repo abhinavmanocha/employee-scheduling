@@ -1,19 +1,17 @@
 <script>
-    import { fade, fly } from "svelte/transition";
+    import { fade } from "svelte/transition";
     import { Link } from "svelte-routing";
 
-    import Input from "../Input.svelte";
-    import Button from "./Button.svelte";
+    import Input from "../Form/Input.svelte";
+    import Button from "../Form/Button.svelte";
 
     let username = "";
     let password = "";
 
-    const signIn = () => {
-
-    }
+    const signIn = () => {};
 </script>
 
-<form class="login" in:fade={{duration: 500}}>
+<form class="login" in:fade={{ duration: 500 }}>
     <header class="login__header">
         <h1 class="login__title">Sign in</h1>
     </header>
@@ -38,7 +36,8 @@
 </form>
 
 <style>
-    .login__header, h1 {
+    .login__header,
+    h1 {
         margin: 0 auto;
     }
 

@@ -1,9 +1,9 @@
 <script>
-    import { fade, fly } from "svelte/transition";
+    import { fade } from "svelte/transition";
     import { isEmpty } from "../../utils/utils";
 
-    import Input from "../Input.svelte";
-    import Button from "./Button.svelte";
+    import Input from "../Form/Input.svelte";
+    import Button from "../Form/Button.svelte";
     import PassIndicator from "./PassIndicator.svelte";
 
     let username = "";

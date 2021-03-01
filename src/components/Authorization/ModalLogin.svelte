@@ -4,6 +4,7 @@
 
     import SignupForm from "./SignupForm.svelte";
     import LoginForm from "./LoginForm.svelte";
+    import { onMount } from "svelte";
 
     export let type;
 
@@ -22,7 +23,7 @@
     <title>Join Us! | Employee Scheduling</title>
 </svelte:head>
 
-<main class="container" in:fly="{{x: -500, duration: 1000}}" out:fade>
+<main class="container" in:fly={{ x: -500, duration: 1000 }} out:fade>
     <div class="container__logo">
         <Link to="/">
             <i class="far fa-calendar-alt" />
@@ -55,6 +56,7 @@
     }
 
     .container__nav--bttn {
+        position: relative;
         background: none;
         border: none;
         cursor: pointer;
@@ -64,8 +66,20 @@
         margin: 1.25rem 1.75rem;
     }
 
-    .container__nav--bttn:hover {
-        color: black;
+    .container__nav--bttn::after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        left: 0px;
+        bottom: -4px;
+        background-color: #2196f3;
+        width: 0%;
+        height: 4px;
+        transition: all 500ms;
+    }
+
+    .container__nav--bttn:hover::after {
+        width: 100%;
     }
 
     .container__logo {
