@@ -1,7 +1,6 @@
 <script>
     import { getContext, onMount } from "svelte";
     import { link } from "svelte-routing";
-    import { clickOutside } from "./clickOutside";
 
     import ModalLogin from "../Authorization/ModalLogin.svelte";
     import SignupForm from "../Authorization/SignupForm.svelte";
@@ -47,7 +46,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="about" class="nav__bttn" use:link>
+                    <a href="#about" class="nav__bttn" use:link>
                         <i class="fas fa-info-circle nav__bttn--icon" />
                         About
                     </a>
@@ -64,7 +63,7 @@
                         on:click={showLoginScreen}
                         class="nav__bttn nav__bttn--signin"
                     >
-                        <i class="fas fa-sign-in-alt default" />
+                        <i class="fas fa-sign-in-alt nav__bttn--icon" class:icon--toggle={!toggle} />
                         Sign In
                     </a>
                 </li>
@@ -74,7 +73,7 @@
                         on:click={showSignUpScreen}
                         class="nav__bttn nav__bttn--signup"
                     >
-                        <i class="fas fa-plus-circle default" />
+                        <i class="fas fa-plus-circle nav__bttn--icon" class:icon--toggle={!toggle} />
                         Sign Up
                     </a>
                 </li>
@@ -185,7 +184,7 @@
         width: 1.1em;
         margin-right: 1em;
         text-align: right;
-        color: rgba(255, 255, 255, 0.4);
+        color: rgba(252, 252, 252, 0.815);
         font-size: 1.5em;
     }
 
@@ -259,6 +258,18 @@
 
         .nav__bttn--icon {
             display: none;
+        }
+
+        .icon--toggle {
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            margin: 0;
+            top: 3px;
+            left: -1px;
+            padding: 0;
+            width: 1rem;
+            color: var(--secColor);
         }
     }
 </style>
