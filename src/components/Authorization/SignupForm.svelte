@@ -1,6 +1,7 @@
 <script>
     import { fade } from "svelte/transition";
-    import { isEmpty } from "../../utils/utils";
+    import { Link, navigate } from "svelte-routing";
+    import { isEmpty, fetchData } from "../../utils/utils";
 
     import Input from "../Form/Input.svelte";
     import Button from "../Form/Button.svelte";
@@ -11,6 +12,7 @@
     let pass = "";
     let passRepeat = "";
     let data;
+    let logged;
 
     let emailRegex = /\S+@\S+\.\S+/;
 
@@ -25,15 +27,18 @@
         };
     }
 
-    const registerUser = () => {
-        if (isEmpty(data)) {
-            return;
-        }
+    const registerUser = async () => {
+        if (!isEmpty(data)) {
+            const resp = await fetchData(
+                `https://randomuser.me/api`,
+                "POST",
+                data
+            );
 
-        fetch(`http://localhost:8000/user`, {
-            method: "POST",
-            body: JSON.stringify(data),
-        });
+            if (resp.statusCode === 200) {
+                logged = resp.data.results;
+            }
+        }
     };
 </script>
 
@@ -60,9 +65,8 @@
         label="Email"
         placeholder="Email"
         bind:value={email}
-        type="email"
+        type="text"
         autocomplete="on"
-        required
     />
     {#if !emailRegex.test(email) && email}
         <span class="register__error"
@@ -77,10 +81,9 @@
             bind:value={pass}
             type="password"
             autocomplete="on"
-            required
         />
         {#if pass}
-            <PassIndicator bind:value={pass} />
+            <PassIndicator bind:password={pass} />
         {/if}
     </div>
 
@@ -90,12 +93,16 @@
         bind:value={passRepeat}
         type="password"
         autocomplete="on"
-        required
     />
     {#if pass !== passRepeat && pass}
         <span class="register__error">Make sure both passwords matches</span>
     {/if}
+    
     <Button on:click={registerUser}>Sign Up</Button>
+
+    {#if logged}
+        <span class="register__successfull">{logged}</span>
+    {/if}
 </form>
 
 <style>
@@ -125,5 +132,10 @@
     .register__error {
         margin: 0 auto;
         color: #d50000;
+    }
+
+    .register__successfull {
+        margin: 0 auto;
+        color: #2196f3;
     }
 </style>

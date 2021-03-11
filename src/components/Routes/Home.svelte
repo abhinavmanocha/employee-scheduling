@@ -1,12 +1,13 @@
 <script>
     import { onMount } from "svelte";
     import { fade, fly } from "svelte/transition";
-    import { Link, navigate } from "svelte-routing";
+    import { navigate } from "svelte-routing";
 
     import { token } from "../../stores";
     import Modal from "../Modal/Modal.svelte";
 
     import Navbar from "../Views/Navbar.svelte";
+    import Slider from "../Views/Slider.svelte";
     import Footer from "../Views/Footer.svelte";
 
     export let title;
@@ -30,20 +31,26 @@
 
     <section class="home__section">
         <div class="home__showcase" in:fade={{ duration: 1250 }}>
-            <!-- <h1 in:fly={{ x: -200, duration: 500 }}>
+            <!-- <h1 class="home__header" in:fly={{ y: -200, duration: 555 }}>
                 <i class="nav__logo far fa-calendar-alt" />
                 Schede
             </h1> -->
         </div>
 
-        <div class="home__about" id="about" name="about">adsasda</div>
+        <div class="home__about" id="about" name="about">
+            <p>
+                Schedule your employee shifts with our state of the art
+                scheduling app. Shift your
+            </p>
+        </div>
 
         <div class="home__boxes">
             <div class="box">
                 <i class="fas fa-handshake fa-4x" />
                 <h3>Easy to use</h3>
                 <p>
-                    Schede is easy to use. Interface is intuitive, buttons are clearly visible and big.
+                    Schede is easy to use. Interface is intuitive, buttons are
+                    clearly visible and big
                 </p>
             </div>
 
@@ -51,7 +58,7 @@
                 <i class="fas fa-chart-pie fa-4x" />
                 <h3>Analytics</h3>
                 <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit
                     Libero, hic.
                 </p>
             </div>
@@ -59,16 +66,47 @@
             <div class="box">
                 <i class="fas fa-users fa-4x" />
                 <h3>Free</h3>
-                <p>Schede is free, you don't have to pay for anything.</p>
+                <p>Schede is free, you don't have to pay for anything</p>
             </div>
         </div>
 
-        <div>aaaa</div>
-        <div>aaaa</div>
-        <div>aaaa</div>
-        <div>aaaa</div>
-        <div>aaaa</div>
-        <div>aaaa</div>
+        <div class="overview">
+            <div class="overview__video">
+                <h3>Overview video</h3>
+                <div class="overview__iframe">
+                    <iframe
+                        class="overview__video--iframe"
+                        title="Schede - Overview"
+                        width="560"
+                        height="315"
+                        src="https://www.youtube.com/embed/p8u_k2LIZyo"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                    />
+                </div>
+                <p class="overview__video--watch">
+                    Watch on
+                    <a
+                        href="https://www.youtube.com/watch?v=p8u_k2LIZyo&t"
+                        target="_blank"
+                        rel="noopener, noreferrer">YouTube</a
+                    >
+                </p>
+            </div>
+
+            <div class="overview__slider">
+                <Modal>
+                    <Slider />
+                </Modal>
+            </div>
+        </div>
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
     </section>
 
     <Footer />
@@ -103,6 +141,13 @@
         box-shadow: var(--shadow);
     }
 
+    .home__header {
+        position: relative;
+        color: aliceblue;
+        font-size: 5rem;
+        right: 15%;
+    }
+
     .home__boxes {
         display: grid;
         place-items: center;
@@ -119,18 +164,44 @@
         box-shadow: var(--shadow);
     }
 
-    .info {
-        background: var(--primary);
+    .box:hover {
+        filter: brightness(5%);
+        cursor: pointer;
+    }
+
+    .overview {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        padding: 5rem;
+    }
+
+    .overview__video {
         box-shadow: var(--shadow);
+        padding: 0.5rem 2rem 2rem 2rem;
+        margin: 1rem;
+        font-weight: 600;
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+        line-height: 1.25rem;
+    }
+
+    .overview__video--watch {
+        margin: 0.5rem 0 0 0;
+        padding: 0;
+    }
+
+    .overview__slider {
         display: grid;
-        grid-gap: 40px;
-        grid-template-columns: repeat(2, 1fr);
-        padding: 3rem;
+        place-content: center;
+        box-shadow: var(--shadow);
+        padding: 2rem;
+        margin: 1rem;
     }
 
     @media screen and (max-width: 768px) {
-        .info {
-            grid-template-columns: 1fr;
+        .overview__video--iframe {
+            width: auto;
         }
     }
 </style>

@@ -4,7 +4,6 @@
 
     import SignupForm from "./SignupForm.svelte";
     import LoginForm from "./LoginForm.svelte";
-    import { onMount } from "svelte";
 
     export let type;
 

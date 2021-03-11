@@ -1,5 +1,5 @@
 <script>
-    export let value;
+    export let password;
 
     let strongPass = /^(?=.{5,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$/;
     let mediumPass = /^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,}))$/;
@@ -8,35 +8,37 @@
     let strength;
 
     $: {
-        if (badPass.test(value)) {
+        if (badPass.test(password)) {
             color = "#D50000";
-            strength = "pretty bad";
-        } else if (mediumPass.test(value)) {
+            strength = "bad";
+        } else if (mediumPass.test(password)) {
             color = "#FF9800";
-            strength = "preety good";
-        } else if (strongPass.test(value)) {
+            strength = "quite good";
+        } else if (strongPass.test(password)) {
             color = "#4CAF50";
             strength = "strong";
-        } else {
-            color = "#999";
-            strength = "";
         }
     }
 </script>
 
-<div class="pass" style="color: {color}">
+<div class="pass__indicator" style="color: {color}">
     <span
-        class="pass__indicator"
+        class="pass__indicator--marker"
         id="indicator"
         style="background-color: {color}"
     />
-    {#if strength}
-        Your password is {strength}
-    {/if}
+    <span class="pass__info">
+        {#if strength}
+            Your password is
+            <span class="pass__strength">{strength}</span>
+        {:else}
+            Please input password
+        {/if}
+    </span>
 </div>
 
 <style>
-    .pass {
+    .pass__indicator {
         display: flex;
         justify-content: left;
         text-align: left;
@@ -44,10 +46,14 @@
         line-height: 1rem;
     }
 
-    .pass__indicator {
+    .pass__indicator--marker {
         width: 1rem;
         height: 1rem;
         border-radius: 1rem;
         margin: 1px;
+    }
+
+    .pass__strength {
+        font-weight: 700;
     }
 </style>

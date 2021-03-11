@@ -1,10 +1,12 @@
 <script>
-
-    
 </script>
 
 <footer class="footer">
-    <p>&copy; by Jakub Kupczyk 2020</p>
+    <p>
+        &copy; 2021
+        <a href="/">Schede</a>
+        | Jakub Kupczyk
+    </p>
 </footer>
 
 <style>
@@ -17,5 +19,10 @@
         color: #fafafa;
         font-size: 1.12rem;
         font-weight: 500;
+    }
+
+    a {
+        color: #fafafa;
+        text-decoration: underline;
     }
 </style>

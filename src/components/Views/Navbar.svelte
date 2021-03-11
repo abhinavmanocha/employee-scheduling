@@ -1,6 +1,7 @@
 <script>
-    import { getContext, onMount } from "svelte";
+    import { getContext } from "svelte";
     import { link } from "svelte-routing";
+    import Modal from "../Modal/Modal.svelte";
 
     import ModalLogin from "../Authorization/ModalLogin.svelte";
     import SignupForm from "../Authorization/SignupForm.svelte";
@@ -18,11 +19,6 @@
 
     const showSignUpScreen = () => {
         open(ModalLogin, { type: SignupForm });
-    };
-
-    const closeNav = () => {
-        navElem.classList.remove("nav__main--open");
-        burgerElem.classList.remove("open");
     };
 </script>
 
@@ -46,13 +42,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#about" class="nav__bttn" use:link>
+                    <a href="#about" class="nav__bttn">
                         <i class="fas fa-info-circle nav__bttn--icon" />
                         About
                     </a>
                 </li>
                 <li>
-                    <a href="contact" class="nav__bttn" use:link>
+                    <a href="#contact" class="nav__bttn">
                         <i class="fas fa-envelope nav__bttn--icon" />
                         Contact
                     </a>
@@ -63,7 +59,10 @@
                         on:click={showLoginScreen}
                         class="nav__bttn nav__bttn--signin"
                     >
-                        <i class="fas fa-sign-in-alt nav__bttn--icon" class:icon--toggle={!toggle} />
+                        <i
+                            class="fas fa-sign-in-alt nav__bttn--icon"
+                            class:icon--toggle={!toggle}
+                        />
                         Sign In
                     </a>
                 </li>
@@ -73,7 +72,10 @@
                         on:click={showSignUpScreen}
                         class="nav__bttn nav__bttn--signup"
                     >
-                        <i class="fas fa-plus-circle nav__bttn--icon" class:icon--toggle={!toggle} />
+                        <i
+                            class="fas fa-plus-circle nav__bttn--icon"
+                            class:icon--toggle={!toggle}
+                        />
                         Sign Up
                     </a>
                 </li>
@@ -102,6 +104,7 @@
         padding: 1em 0;
         background: var(--mainColor);
         color: #ebebd3;
+        z-index: 999;
     }
 
     .nav::after {

@@ -1,14 +1,32 @@
 <script>
     import { fade } from "svelte/transition";
-    import { Link } from "svelte-routing";
+    import { Link, navigate } from "svelte-routing";
+    import { fetchData } from "../../utils/utils";
+    import { token, logged, user, pass } from "../../stores";
 
     import Input from "../Form/Input.svelte";
     import Button from "../Form/Button.svelte";
 
-    let username = "";
-    let password = "";
+    let username;
+    let password;
 
-    const signIn = () => {};
+    let reqData = username !== undefined || password !== undefined;
+
+    const requestLogin = () => {};
+
+    const signIn = async () => {
+        const response = await fetchData(`https://randomuser.me/api`, "POST", {
+            username: username,
+            password: password,
+        });
+
+        if (reqData && response.statusCode === 200) {
+            localStorage.setItem("token", "1");
+            token.set(localStorage.getItem("token"));
+
+            navigate("/dashboard", { replace: true });
+        }
+    };
 </script>
 
 <form class="login" in:fade={{ duration: 500 }}>
@@ -17,21 +35,28 @@
     </header>
 
     <Input
-        label="Username"
-        placeholder="Username or email address"
+        label="Username or email"
+        placeholder="Username or email"
         bind:value={username}
         type="text"
-        required
+        autocomplete="on"
     />
+    {#if username === ""}
+        <span class="login__error">This field is required</span>
+    {/if}
     <Input
         label="Password"
         placeholder="Password"
         bind:value={password}
-        type="text"
-        required
+        type="password"
+        autocomplete="on"
     />
+    {#if password === ""}
+        <span class="login__error">This field is required</span>
+    {/if}
 
     <Button on:click={signIn}>Sign In</Button>
+
     <Link to="restore-password" class="link">Forgot password?</Link>
 </form>
 
@@ -47,6 +72,11 @@
         justify-content: center;
         align-items: center;
         text-align: center;
+    }
+
+    .login__error {
+        margin: 0 auto;
+        color: #d50000;
     }
 
     .link {
