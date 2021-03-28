@@ -15,10 +15,11 @@
     <title>Dashboard | Employee Scheduling</title>
 </svelte:head>
 
+
 <main>
     <h2>
         <Link to="/" on:click={logout}>Logout</Link>
     </h2>
-
-    <Footer />
 </main>
+
+<Footer />

@@ -11,34 +11,35 @@
     let email = "";
     let pass = "";
     let passRepeat = "";
-    let data;
-    let logged;
+    let body = "";
+
+    let msg = "";
 
     let emailRegex = /\S+@\S+\.\S+/;
+    let registerSuccessful = false;
 
     $: {
-        data = {
+        body = {
             username: username,
             email: email,
             pass: pass,
-            name: "",
-            surname: "",
-            role: "user",
+            name: "test",
+            surname: "test",
+            role: "test",
         };
     }
 
     const registerUser = async () => {
-        if (!isEmpty(data)) {
-            const resp = await fetchData(
-                `https://randomuser.me/api`,
-                "POST",
-                data
-            );
+        const response = await fetch(`http://localhost:8000/register`, {
+            method: "POST",
+            body: JSON.stringify(body),
+        });
 
-            if (resp.statusCode === 200) {
-                logged = resp.data.results;
-            }
-        }
+        const data = await response.json();
+
+        registerSuccessful = data.statusCode === 201 ? true : false;
+
+        msg = data.message;
     };
 </script>
 
@@ -97,12 +98,13 @@
     {#if pass !== passRepeat && pass}
         <span class="register__error">Make sure both passwords matches</span>
     {/if}
-    
-    <Button on:click={registerUser}>Sign Up</Button>
 
-    {#if logged}
-        <span class="register__successfull">{logged}</span>
-    {/if}
+    <span
+        class:register__error={!registerSuccessful}
+        class:register__successfull={registerSuccessful}>{msg}</span
+    >
+
+    <Button on:click={registerUser}>Sign Up</Button>
 </form>
 
 <style>

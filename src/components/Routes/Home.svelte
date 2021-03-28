@@ -1,9 +1,6 @@
 <script>
     import { onMount } from "svelte";
     import { fade, fly } from "svelte/transition";
-    import { navigate } from "svelte-routing";
-
-    import { token } from "../../stores";
     import Modal from "../Modal/Modal.svelte";
 
     import Navbar from "../Views/Navbar.svelte";
@@ -11,13 +8,6 @@
     import Footer from "../Views/Footer.svelte";
 
     export let title;
-
-    const login = () => {
-        localStorage.setItem("token", "1");
-        token.set(localStorage.getItem("token"));
-
-        navigate("/dashboard", { replace: true });
-    };
 </script>
 
 <svelte:head>
@@ -30,12 +20,7 @@
     </Modal>
 
     <section class="home__section">
-        <div class="home__showcase" in:fade={{ duration: 1250 }}>
-            <!-- <h1 class="home__header" in:fly={{ y: -200, duration: 555 }}>
-                <i class="nav__logo far fa-calendar-alt" />
-                Schede
-            </h1> -->
-        </div>
+        <div class="home__showcase" in:fade={{ duration: 1250 }} />
 
         <div class="home__about" id="about" name="about">
             <p>
@@ -101,12 +86,6 @@
                 </Modal>
             </div>
         </div>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
     </section>
 
     <Footer />
@@ -152,6 +131,7 @@
         display: grid;
         place-items: center;
         grid-gap: 20px;
+        grid-auto-rows: 1fr;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         margin: 10px;
     }

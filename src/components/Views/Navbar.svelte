@@ -25,8 +25,10 @@
 <header class="nav">
     <div class="nav__container">
         <h4 class="nav__header">
-            <i class="nav__logo far fa-calendar-alt" />
-            Schede
+            <a href="/" class="nav__bttn" use:link>
+                <i class="nav__logo far fa-calendar-alt" />
+                Schede
+            </a>
         </h4>
 
         <nav
@@ -120,6 +122,7 @@
     }
 
     .nav__header {
+        color: var(--secColor);
         float: left;
         font-size: 1.125rem;
         margin: 0;
@@ -169,10 +172,11 @@
 
     .nav__bttn:hover,
     .nav__bttn:focus {
-        color: #575766;
+        color: #fafafa;
     }
 
     .nav__bttn {
+        color: var(--secColor);
         padding: 0 2em;
         text-transform: uppercase;
         font-weight: 600;

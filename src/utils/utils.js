@@ -15,9 +15,11 @@ export const fetchData = async (url = '', method = 'GET', body = {}) => {
             mode: "cors",
             body: JSON.stringify(body)
         });
-        return { data: response.json(), statusCode: response.status };
 
+        return { data: response.json(), statusCode: response.status };
     } catch (err) {
         console.error(err);
+        console.log(err.message);
     }
+
 }

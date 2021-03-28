@@ -219,10 +219,5 @@
         .carousel {
             width: auto;
         }
-
-        .carousel__nav {
-            margin: 1px 0;
-            padding: 6px;
-        }
     }
 </style>
