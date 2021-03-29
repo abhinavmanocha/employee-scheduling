@@ -22,7 +22,7 @@
         const data = await response.json();
 
         if (data.statusCode === 200) {
-            navigate("/dashboard", { replace: true });
+            navigate("/schede/schedules", { replace: true });
         }
 
         logMsg = data.message;
@@ -89,9 +89,5 @@
         font-weight: 500;
         margin: 1rem;
         color: #d50000;
-    }
-
-    .link {
-        color: #2196f3;
     }
 </style>

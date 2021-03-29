@@ -26,7 +26,7 @@
     <div class="nav__container">
         <h4 class="nav__header">
             <a href="/" class="nav__bttn" use:link>
-                <i class="nav__logo far fa-calendar-alt" />
+                <i class="nav__logo fab fa-phoenix-squadron" />
                 Schede
             </a>
         </h4>

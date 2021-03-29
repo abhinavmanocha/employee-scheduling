@@ -4,8 +4,9 @@
 <footer class="footer">
     <p>
         &copy; 2021
-        <a href="/">Schede</a>
-        | Jakub Kupczyk
+        <a href="https://github.com/Schede-org" target="_blank" rel="noopener noreferrer">Schede</a>
+        | 
+        <a href="https://github.com/jkbkupczyk" target="_blank" rel="noopener noreferrer">Jakub Kupczyk</a>
     </p>
 </footer>
 

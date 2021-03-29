@@ -25,7 +25,7 @@
 <main class="container" in:fly={{ x: -500, duration: 1000 }} out:fade>
     <div class="container__logo">
         <Link to="/">
-            <i class="far fa-calendar-alt" />
+            <i class="fab fa-phoenix-squadron" />
         </Link>
     </div>
     <nav class="container__nav">

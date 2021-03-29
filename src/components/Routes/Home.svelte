@@ -120,13 +120,6 @@
         box-shadow: var(--shadow);
     }
 
-    .home__header {
-        position: relative;
-        color: aliceblue;
-        font-size: 5rem;
-        right: 15%;
-    }
-
     .home__boxes {
         display: grid;
         place-items: center;
@@ -134,6 +127,7 @@
         grid-auto-rows: 1fr;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         margin: 10px;
+        background-color: #fafafa;
     }
 
     .box {

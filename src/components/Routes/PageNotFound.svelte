@@ -18,7 +18,9 @@
 <main class="pnf__main">
     <h1 class="pnf__header">Page not found 😥</h1>
     <p class="pnf__content">
-        Go back to <Link to="/">Home page</Link>
+        <span>
+            Go back to <Link to="/">Home page</Link>
+        </span>
     </p>
 </main>
 
