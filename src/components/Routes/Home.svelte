@@ -127,19 +127,18 @@
         grid-auto-rows: 1fr;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         margin: 10px;
-        background-color: #fafafa;
     }
 
     .box {
         max-width: 356px;
-        background: var(--primary);
+        background: white;
         text-align: center;
         padding: 1.5rem 2rem;
         box-shadow: var(--shadow);
     }
 
     .box:hover {
-        filter: brightness(5%);
+        filter: brightness(95%);
         cursor: pointer;
     }
 

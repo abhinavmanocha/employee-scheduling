@@ -125,7 +125,7 @@
         color: var(--secColor);
         float: left;
         font-size: 1.125rem;
-        margin: 0;
+        margin: 0 auto;
         padding: 0;
         text-transform: uppercase;
         font-weight: 700;
@@ -235,14 +235,19 @@
         transform: translateY(-3px) rotate(-90deg);
     }
 
-    @media (min-width: 761px) {
+    @media (min-width: 798px) {
         .nav__toggle {
             display: none;
+        }
+
+        .nav__header .nav__bttn {
+            padding: 0;
         }
 
         .nav__main {
             position: relative;
             background: transparent;
+            margin: 0;
             height: auto;
             float: right;
             clip-path: initial;
@@ -256,6 +261,10 @@
         .nav__main a {
             padding: 0;
             margin-left: 3em;
+        }
+
+        .nav__bttn {
+            margin: 0;
         }
 
         .nav__main a:hover,

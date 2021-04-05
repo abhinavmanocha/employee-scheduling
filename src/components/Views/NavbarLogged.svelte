@@ -14,7 +14,7 @@
 <nav class="navbar">
     <ul class="navbar__nav">
         <li class="nav__item">
-            <a href={"/schede/schedules"} class="nav__link" use:link>
+            <a href={"/app/schedules"} class="nav__link" use:link>
                 <div class="link__icon">
                     <i class="far fa-calendar-alt fa-2x" />
                 </div>
@@ -23,7 +23,7 @@
         </li>
 
         <li class="nav__item">
-            <a href={"/schede/squads"} class="nav__link" use:link>
+            <a href={"/app/squads"} class="nav__link" use:link>
                 <div class="link__icon">
                     <i class="fas fa-users fa-2x" />
                 </div>
@@ -32,16 +32,16 @@
         </li>
 
         <li class="nav__item">
-            <a href={"/schede/lorem"} class="nav__link" use:link>
+            <a href={"/app/employees"} class="nav__link" use:link>
                 <div class="link__icon">
                     <i class="fas fa-layer-group fa-2x" />
                 </div>
-                <span class="link__text">LOREM</span>
+                <span class="link__text">Employees</span>
             </a>
         </li>
 
         <li class="nav__item">
-            <a href={"/schede/user"} class="nav__link" use:link>
+            <a href={"/app/user"} class="nav__link" use:link>
                 <div class="link__icon">
                     <i class="fas fa-user-alt fa-2x" />
                 </div>
@@ -50,7 +50,7 @@
         </li>
 
         <li class="nav__item">
-            <a href={"/schede/help"} class="nav__link" use:link>
+            <a href={"/app/help"} class="nav__link" use:link>
                 <div class="link__icon">
                     <i class="fab fa-teamspeak fa-2x" />
                 </div>
@@ -83,6 +83,7 @@
         background-color: #eeeeee;
         transition: width 600ms ease;
         overflow: hidden;
+        z-index: 999;
     }
 
     .navbar__nav {
@@ -131,7 +132,8 @@
 
     .link__text {
         display: none;
-        margin: 0 auto;
+        /* margin: 0 auto; */
+        text-align: left;
         text-transform: uppercase;
         font-size: 1.15rem;
         font-weight: bolder;
@@ -161,7 +163,7 @@
         }
 
         .navbar:hover {
-            width: 16rem;
+            width: 18rem;
         }
 
         .navbar:hover .link__text {

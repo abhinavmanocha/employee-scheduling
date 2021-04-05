@@ -1,34 +1,44 @@
 <script>
     import { fade } from "svelte/transition";
     import { Link, navigate } from "svelte-routing";
-    import { token } from "../../stores";
-
-    import { fetchData } from "../../utils/utils";
+    import { jwt, token, loggedUser, user } from "../../stores";
 
     import Input from "../Form/Input.svelte";
     import Button from "../Form/Button.svelte";
 
-    let email;
-    let password;
+    let email = "";
+    let password = "";
 
     let logMsg = "";
 
+    const storeData = (data) => {
+        if (data.statusCode === 200) {
+            new Promise((res, rej) => {
+                localStorage.setItem("user", data);
+                user.set(localStorage.getItem("user"));
+
+                localStorage.setItem("token", "1");
+                token.set(localStorage.getItem("token"));
+
+                localStorage.setItem("loggedUser", data.userId);
+                loggedUser.set(localStorage.getItem("loggedUser"));
+
+                localStorage.setItem("jwt", data.jwt);
+                jwt.set(localStorage.getItem("jwt"));
+            }).then(navigate("/app/schedules", { replace: true }));
+        }
+    };
+
     const signIn = async () => {
-        const response = await fetch(`http://localhost:8000/login`, {
+        const response = await fetch(`/login`, {
             method: "POST",
             body: JSON.stringify({ email: email, password: password }),
-        });
-
-        const data = await response.json();
-
-        if (data.statusCode === 200) {
-            navigate("/schede/schedules", { replace: true });
-        }
-
-        logMsg = data.message;
-
-        localStorage.setItem("token", data.jwt);
-        token.set(localStorage.getItem("token"));
+        })
+            .then((resp) => resp.json())
+            .then((data) => {
+                logMsg = data.message;
+                storeData(data);
+            });
     };
 </script>
 

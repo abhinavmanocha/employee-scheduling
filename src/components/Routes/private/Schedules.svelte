@@ -1,41 +1,28 @@
 <script>
-    import Modal from "../../Modal/Modal.svelte";
-    import NavbarLogged from "../../Views/NavbarLogged.svelte";
 </script>
 
 <svelte:head>
-    <title>Help | Employee Scheduling</title>
+    <title>Schedules | Employee Scheduling</title>
 </svelte:head>
 
-<main>
-    <div>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt,
-        distinctio, ratione commodi tempore dolorem quibusdam quo, repellendus
-        debitis qui doloremque molestiae eum odit. Quibusdam sunt labore qui in
-        ea maxime.
-    </div>
-    <div>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt,
-        distinctio, ratione commodi tempore dolorem quibusdam quo, repellendus
-        debitis qui doloremque molestiae eum odit. Quibusdam sunt labore qui in
-        ea maxime.
-    </div>
-    <div>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt,
-        distinctio, ratione commodi tempore dolorem quibusdam quo, repellendus
-        debitis qui doloremque molestiae eum odit. Quibusdam sunt labore qui in
-        ea maxime.
-    </div>
-    <div>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt,
-        distinctio, ratione commodi tempore dolorem quibusdam quo, repellendus
-        debitis qui doloremque molestiae eum odit. Quibusdam sunt labore qui in
-        ea maxime.
-    </div>
-    <div>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt,
-        distinctio, ratione commodi tempore dolorem quibusdam quo, repellendus
-        debitis qui doloremque molestiae eum odit. Quibusdam sunt labore qui in
-        ea maxime.
-    </div>
+<main class="schedules">
+    <div>Schedules</div>
 </main>
+
+<style>
+    .schedules {
+        display: flex;
+        margin: 1rem auto;
+        text-align: center;
+        margin-left: 7rem;
+    }
+
+    @media screen and (max-width: 798px) {
+        .schedules {
+            margin: 1rem 2rem;
+            margin-bottom: 6rem;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+</style>

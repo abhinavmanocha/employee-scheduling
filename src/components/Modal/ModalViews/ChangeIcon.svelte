@@ -1,40 +1,24 @@
 <script>
-    import { getContext } from "svelte";
-    import { navigate } from "svelte-routing";
-
-    import { token } from "../../../stores";
-
-    const { close } = getContext("simple-modal");
-
-    const logout = () => {
+    const changeIcon = () => {
         localStorage.clear();
         token.set(localStorage.getItem("token"));
 
         navigate("/", { replace: true });
     };
-
-    const logoutCancel = () => {
-        close();
-    };
 </script>
 
-<div class="logout">
+<div class="icon">
     <header class="logout__header">
         <h1>Confirm logout</h1>
     </header>
 
-    <div class="logout__msg">Are you sure you want to log out?</div>
+    <div class="iconReq__msg">Are you sure you want to log out?</div>
 
     <div class="logout__actions">
         <button
             type="button"
             class="logout__action logout__action--yes"
-            on:click={logout}>Yes</button
-        >
-        <button
-            type="button"
-            class="logout__action logout__action--no"
-            on:click={logoutCancel}>No</button
+            on:click={changeIcon}>Yes</button
         >
     </div>
 </div>
@@ -54,7 +38,7 @@
         color: var(--primary);
     }
 
-    .logout__msg {
+    .iconReq__msg {
         font-size: 1.5rem;
         font-weight: 500;
     }

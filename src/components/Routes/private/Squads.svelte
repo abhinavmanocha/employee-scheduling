@@ -1,41 +1,47 @@
 <script>
-    import Modal from "../../Modal/Modal.svelte";
-    import NavbarLogged from "../../Views/NavbarLogged.svelte";
+    import { Plane } from "svelte-loading-spinners";
+
+    const test = 0;
 </script>
 
 <svelte:head>
-    <title>Help | Employee Scheduling</title>
+    <title>Your Squads | Employee Scheduling</title>
 </svelte:head>
 
-<main>
-    <div>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt,
-        distinctio, ratione commodi tempore dolorem quibusdam quo, repellendus
-        debitis qui doloremque molestiae eum odit. Quibusdam sunt labore qui in
-        ea maxime.
-    </div>
-    <div>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt,
-        distinctio, ratione commodi tempore dolorem quibusdam quo, repellendus
-        debitis qui doloremque molestiae eum odit. Quibusdam sunt labore qui in
-        ea maxime.
-    </div>
-    <div>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt,
-        distinctio, ratione commodi tempore dolorem quibusdam quo, repellendus
-        debitis qui doloremque molestiae eum odit. Quibusdam sunt labore qui in
-        ea maxime.
-    </div>
-    <div>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt,
-        distinctio, ratione commodi tempore dolorem quibusdam quo, repellendus
-        debitis qui doloremque molestiae eum odit. Quibusdam sunt labore qui in
-        ea maxime.
-    </div>
-    <div>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt,
-        distinctio, ratione commodi tempore dolorem quibusdam quo, repellendus
-        debitis qui doloremque molestiae eum odit. Quibusdam sunt labore qui in
-        ea maxime.
-    </div>
-</main>
+{#await test}
+    <main class="loading">
+        <Plane size="60" color="#2196f3" unit="px" duration="0.5s" />
+    </main>
+{:then data}
+    <main class="squads">
+        <div>Squads</div>
+    </main>
+{/await}
+
+<style>
+    .loading {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+    
+    .squads {
+        display: flex;
+        margin: 1rem auto;
+        text-align: center;
+        margin-left: 7rem;
+    }
+
+    @media screen and (max-width: 798px) {
+        .squads {
+            margin: 1rem 2rem;
+            margin-bottom: 6rem;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+</style>

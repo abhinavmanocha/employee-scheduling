@@ -1,8 +1,6 @@
 import { writable } from "svelte/store";
 
-export const user = writable(null);
-export const pass = writable(null);
-export const logged = writable(false);
-
+export const user = writable(localStorage.getItem('user'));
 export const token = writable(localStorage.getItem('token'));
-export const jwt = writable(null);
+export const jwt = writable(localStorage.getItem('jwt'));
+export const loggedUser = writable(localStorage.getItem('loggedUser'));
