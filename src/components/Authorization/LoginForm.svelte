@@ -14,9 +14,6 @@
     const storeData = (data) => {
         if (data.statusCode === 200) {
             new Promise((res, rej) => {
-                localStorage.setItem("user", data);
-                user.set(localStorage.getItem("user"));
-
                 localStorage.setItem("token", "1");
                 token.set(localStorage.getItem("token"));
 
@@ -25,12 +22,12 @@
 
                 localStorage.setItem("jwt", data.jwt);
                 jwt.set(localStorage.getItem("jwt"));
-            }).then(navigate("/app/schedules", { replace: true }));
+            }).then(window.location.reload(true));
         }
     };
 
     const signIn = async () => {
-        const response = await fetch(`/login`, {
+        const response = await fetch(`https://schede.herokuapp.com/login`, {
             method: "POST",
             body: JSON.stringify({ email: email, password: password }),
         })

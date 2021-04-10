@@ -8,17 +8,28 @@
 
     const { open } = getContext("simple-modal");
 
+    let good = false;
+
     const request = fetch(
-        `/user/${localStorage.getItem("loggedUser")}`,
+        `https://schede.herokuapp.com/user/${localStorage.getItem(
+            "loggedUser"
+        )}`,
         {
             method: "GET",
+            mode: "cors",
             headers: {
-                Accept: "application/json",
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorage.getItem("jwt")}`,
             },
         }
-    ).then((resp) => resp.json());
+    ).then((resp) => {
+        if (resp.ok) {
+            good = true;
+            return resp.json();
+        } else {
+            good = false;
+        }
+    });
 
     const changeProfileIcon = () => {
         open(ChangeIcon, { type: ChangeIcon });
@@ -34,88 +45,97 @@
 </svelte:head>
 
 {#await request}
-    <main class="loading">
+    <main class="error">
         <Plane size="60" color="#2196f3" unit="px" duration="0.5s" />
         <p>Fetching Data...</p>
     </main>
 {:then data}
-    <main class="user">
-        <section class="user__card">
-            <div
-                class="card__container card__container--image"
-                on:click={changeProfileIcon}
-            >
-                <img
-                    src={data.img_url || "/imgs/default.png"}
-                    width="128"
-                    height="128"
-                    alt="ALT"
-                    class="card__image  noselect"
-                />
-                <span class="card__button--upload noselect">
-                    <i class="fas fa-marker" />
-                    Update your photo
-                </span>
-            </div>
-
-            <div class="card__container card__container--info">
-                <h2>{data.name || "name"} {data.surname || "surname"}</h2>
-                <span class="card__position"
-                    >{data.jobtitle || "unemployed"}</span
+    {#if !good}
+        <main class="error">
+            <p>{data.error}</p>
+            <p>{data.message}</p>
+        </main>
+    {:else}
+        <main class="user">
+            <section class="user__card">
+                <div
+                    class="card__container card__container--image"
+                    on:click={changeProfileIcon}
                 >
-                <p class="card__data">
-                    <strong>Location:</strong>
-                    <span
-                        >{`${data.iso || "unknown"}, ` +
-                            `${data.country || "unknown"}`}</span
-                    >
-                </p>
-                <p class="card__data">
-                    <strong>Education:</strong>
-                    <span>{data.education || "unknown"}</span>
-                </p>
-            </div>
-        </section>
-
-        <section class="user__details">
-            <div class="details__wrapper">
-                <div class="details__header">
-                    <h3>
-                        <i class="fas fa-user-tie fa-1x" />
-                        <span class="personal__info">Personal Information</span>
-                    </h3>
-                    <span
-                        class="update__button update__button--active"
-                        on:click={() => openModalEdit(data)}>Edit</span
-                    >
+                    <img
+                        src={data.img_url || "/imgs/default.png"}
+                        width="128"
+                        height="128"
+                        alt="ALT"
+                        class="card__image  noselect"
+                    />
+                    <span class="card__button--upload noselect">
+                        <i class="fas fa-marker" />
+                        Update your photo
+                    </span>
                 </div>
 
-                <div class="details__content">
-                    {#each Object.entries(data) as [key, val] (key)}
-                        {#if key != "country_id"}
-                            {#if key == "img_url"}
-                                <div class="details__wrap">
-                                    <span class="info__header">{key}</span>
-                                    <a
-                                        class="info__data"
-                                        href={val}
-                                        target="_blank">{val}</a
-                                    >
-                                </div>
-                            {:else}
-                                <div class="details__wrap">
-                                    <span class="info__header">{key}</span>
-                                    <span class="info__data">{val}</span>
-                                </div>
+                <div class="card__container card__container--info">
+                    <h2>{data.name || "name"} {data.surname || "surname"}</h2>
+                    <span class="card__position"
+                        >{data.jobtitle || "unemployed"}</span
+                    >
+                    <p class="card__data">
+                        <strong>Location:</strong>
+                        <span
+                            >{`${data.iso || "unknown"}, ` +
+                                `${data.country || "unknown"}`}</span
+                        >
+                    </p>
+                    <p class="card__data">
+                        <strong>Education:</strong>
+                        <span>{data.education || "unknown"}</span>
+                    </p>
+                </div>
+            </section>
+
+            <section class="user__details">
+                <div class="details__wrapper">
+                    <div class="details__header">
+                        <h3>
+                            <i class="fas fa-user-tie fa-1x" />
+                            <span class="personal__info"
+                                >Personal Information</span
+                            >
+                        </h3>
+                        <span
+                            class="update__button update__button--active"
+                            on:click={() => openModalEdit(data)}>Edit</span
+                        >
+                    </div>
+
+                    <div class="details__content">
+                        {#each Object.entries(data) as [key, val] (key)}
+                            {#if key != "country_id"}
+                                {#if key == "img_url"}
+                                    <div class="details__wrap">
+                                        <span class="info__header">{key}</span>
+                                        <a
+                                            class="info__data info__data--imgurl"
+                                            href={val}
+                                            target="_blank">{val.length > 64 ? val.substring(val.lastIndexOf("//") + 2, val.lastIndexOf("/")) : val}</a
+                                        >
+                                    </div>
+                                {:else}
+                                    <div class="details__wrap">
+                                        <span class="info__header">{key}</span>
+                                        <span class="info__data">{val}</span>
+                                    </div>
+                                {/if}
                             {/if}
-                        {/if}
-                    {/each}
+                        {/each}
+                    </div>
                 </div>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
+    {/if}
 {:catch error}
-    <main class="loading">
+    <main class="error">
         <p>{error.message}</p>
     </main>
 {/await}
@@ -130,14 +150,13 @@
         user-select: none;
     }
 
-    .loading {
+    .error {
         height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
         text-align: center;
-        align-items: center;
-        margin: 0 auto;
+        margin: 0;
         font-size: 2.5rem;
         color: #2196f3;
     }
@@ -258,6 +277,11 @@
         margin: 0 auto;
         color: #2b2b2b;
         font-size: 1.25rem;
+    }
+
+    .info__data--imgurl {
+        text-decoration: underline;
+        color: #2196f3;
     }
 
     .update__button--active {

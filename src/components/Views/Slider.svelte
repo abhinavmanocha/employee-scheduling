@@ -28,6 +28,7 @@
 
     let prevBttn;
     let nextBttn;
+    let dot;
 
     onMount(() => {
         const trackElem = document.querySelector(".carousel__track");
@@ -101,7 +102,7 @@
         class="carousel__button carousel__button--prev"
         bind:this={prevBttn}
     >
-        <i class="fas fa-angle-left fa-4x carousel__bttn--img" />
+        &#10094;
     </button>
 
     <div on:click={bigScreen} class="carousel__track--container">
@@ -123,12 +124,12 @@
         class="carousel__button carousel__button--next"
         bind:this={nextBttn}
     >
-        <i class="fas fa-angle-right fa-4x carousel__bttn--img" />
+        &#10095;
     </button>
 
     <div class="carousel__nav">
         {#each imgs as img}
-            <button class="carousel__indicator current-slide" />
+            <button class="carousel__indicator current-slide" bind:this={dot} on:click={dotss(dot)}/>
         {/each}
     </div>
 </div>
@@ -180,6 +181,16 @@
         cursor: pointer;
         font-weight: 700;
         font-size: 2rem;
+        padding: 16px;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        transition: 700ms ease;
+        z-index: 99;
+    }
+
+    .carousel__button:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #fafafa;
     }
 
     .carousel__button--prev {
@@ -188,10 +199,6 @@
 
     .carousel__button--next {
         right: -35px;
-    }
-
-    .carousel__bttn--img {
-        width: 12px;
     }
 
     .carousel__nav {
@@ -215,9 +222,21 @@
         cursor: pointer;
     }
 
+    @media screen and (max-width: 1500px) {
+        .carousel__nav {
+            padding: 0;
+            margin-top: 0.37rem;
+        }
+    }
+
     @media screen and (max-width: 768px) {
         .carousel {
             width: auto;
+        }
+
+        .carousel__nav {
+            padding: 0;
+            margin-top: 0.37rem;
         }
     }
 </style>

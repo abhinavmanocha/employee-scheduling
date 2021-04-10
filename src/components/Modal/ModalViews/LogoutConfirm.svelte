@@ -11,6 +11,7 @@
         token.set(localStorage.getItem("token"));
 
         navigate("/", { replace: true });
+        window.location.reload(true);
     };
 
     const logoutCancel = () => {

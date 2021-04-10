@@ -6,6 +6,7 @@
     import ModalLogin from "../Authorization/ModalLogin.svelte";
     import SignupForm from "../Authorization/SignupForm.svelte";
     import LoginForm from "../Authorization/LoginForm.svelte";
+    import LogoutConfirm from "../Modal/ModalViews/LogoutConfirm.svelte";
 
     const { open } = getContext("simple-modal");
 
@@ -19,6 +20,10 @@
 
     const showSignUpScreen = () => {
         open(ModalLogin, { type: SignupForm });
+    };
+
+    const logout = () => {
+        open(LogoutConfirm, { type: LogoutConfirm });
     };
 </script>
 
@@ -50,37 +55,66 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#contact" class="nav__bttn">
-                        <i class="fas fa-envelope nav__bttn--icon" />
-                        Contact
-                    </a>
-                </li>
-                <li>
                     <a
-                        href={"#"}
-                        on:click={showLoginScreen}
-                        class="nav__bttn nav__bttn--signin"
+                        href="https://schede.herokuapp.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="nav__bttn"
                     >
                         <i
-                            class="fas fa-sign-in-alt nav__bttn--icon"
+                            class="fas fa-cogs nav__bttn--icon"
                             class:icon--toggle={!toggle}
                         />
-                        Sign In
+                        API
                     </a>
                 </li>
-                <li>
-                    <a
-                        href={"#"}
-                        on:click={showSignUpScreen}
-                        class="nav__bttn nav__bttn--signup"
-                    >
-                        <i
-                            class="fas fa-plus-circle nav__bttn--icon"
-                            class:icon--toggle={!toggle}
-                        />
-                        Sign Up
-                    </a>
-                </li>
+                {#if localStorage.getItem("jwt") != null}
+                    <li>
+                        <a href="/app/schedules" class="nav__bttn">
+                            <i class="fas fa-calendar-alt" />
+                            Schedules
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/app/user" class="nav__bttn">
+                            <i class="fas fa-user-circle" />
+                            Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href={"#"} class="nav__bttn" on:click={logout}>
+                            <i class="fas fa-sign-out-alt" />
+                            Logout
+                        </a>
+                    </li>
+                {:else}
+                    <li>
+                        <a
+                            href={"#"}
+                            on:click={showLoginScreen}
+                            class="nav__bttn nav__bttn--signin"
+                        >
+                            <i
+                                class="fas fa-sign-in-alt nav__bttn--icon"
+                                class:icon--toggle={!toggle}
+                            />
+                            Sign In
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href={"#"}
+                            on:click={showSignUpScreen}
+                            class="nav__bttn nav__bttn--signup"
+                        >
+                            <i
+                                class="fas fa-plus-circle nav__bttn--icon"
+                                class:icon--toggle={!toggle}
+                            />
+                            Sign Up
+                        </a>
+                    </li>
+                {/if}
             </ul>
         </nav>
 
@@ -235,7 +269,7 @@
         transform: translateY(-3px) rotate(-90deg);
     }
 
-    @media (min-width: 798px) {
+    @media (min-width: 1000px) {
         .nav__toggle {
             display: none;
         }

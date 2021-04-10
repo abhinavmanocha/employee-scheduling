@@ -7,7 +7,7 @@
     let data = {};
 
     // get list of all countries
-    const request = fetch(`/countries`).then((resp) =>
+    const request = fetch(`https://schede.herokuapp.com/countries`).then((resp) =>
         resp.json()
     );
 </script>
@@ -56,6 +56,7 @@
                             {:else}
                                 <Input
                                     label={val}
+                                    id={key}
                                     placeholder={val}
                                     bind:value={data.key}
                                     type="text"

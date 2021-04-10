@@ -58,6 +58,15 @@
             </a>
         </li>
 
+        <li class="nav__item">
+            <a href={"/"} class="nav__link" use:link on:click={() => {window.location.reload(true)}}>
+                <div class="link__icon">
+                    <i class="fas fa-home fa-2x" />
+                </div>
+                <span class="link__text">Home</span>
+            </a>
+        </li>
+
         <li class="nav__item nav__item--logout" on:click={logout}>
             <a href={"#"} class="nav__link">
                 <div class="link__icon">
@@ -76,6 +85,10 @@
         --bg-primary: #fafafa;
         --bg-secondary: #2196f3;
         --transition-speed: 600ms;
+    }
+
+    .active {
+        color: var(--text-primary);
     }
 
     .navbar {

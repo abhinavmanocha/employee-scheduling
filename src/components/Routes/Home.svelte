@@ -23,9 +23,10 @@
         <div class="home__showcase" in:fade={{ duration: 1250 }} />
 
         <div class="home__about" id="about" name="about">
+            <span class="about__logo">Schede</span>
             <p>
                 Schedule your employee shifts with our state of the art
-                scheduling app. Shift your
+                scheduling app.
             </p>
         </div>
 
@@ -51,7 +52,7 @@
             <div class="box">
                 <i class="fas fa-users fa-4x" />
                 <h3>Free</h3>
-                <p>Schede is free, you don't have to pay for anything</p>
+                <p>Schede is free, you don't have to pay for anything, beside your internet connection fees</p>
             </div>
         </div>
 
@@ -105,6 +106,21 @@
         display: flex;
         flex-flow: column nowrap;
         position: relative;
+    }
+
+    .home__about {
+        text-align: center;
+        font-size: 3rem;
+    }
+
+    .about__logo {
+        color: var(--mainColor);
+        font-weight: 600;
+        font-size: 3.5rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 0 auto;
+        margin-right: 50%;
     }
 
     .home__showcase {

@@ -11,29 +11,32 @@
     let email = "";
     let pass = "";
     let passRepeat = "";
-    let body = "";
+    let body = {};
 
     let msg = "";
 
     let emailRegex = /\S+@\S+\.\S+/;
     let registerSuccessful = false;
 
-    $: {
-        body = {
-            username: username,
-            email: email,
-            pass: pass,
-            name: "test",
-            surname: "test",
-            role: "test",
-        };
-    }
-
     const registerUser = async () => {
-        const response = await fetch(`http://localhost:8000/register`, {
+        const response = await fetch(`http://schede.herokuapp.com/register`, {
             method: "POST",
-            body: JSON.stringify(body),
+            mode: "cors",
+            body: JSON.stringify({
+                username: username,
+                email: email,
+                pass: pass,
+                name: "",
+                surname: "",
+                jobtitle: "",
+                country_id: 171,
+                education: "",
+                img_url: "",
+                role: 2,
+            }),
         });
+
+        console.log(body);
 
         const data = await response.json();
 
@@ -43,7 +46,7 @@
     };
 </script>
 
-<form class="register" in:fade={{ duration: 500 }}>
+<main class="register" in:fade={{ duration: 500 }}>
     <header class="register__header">
         <h1 class="register__title">Sign up</h1>
     </header>
@@ -105,7 +108,7 @@
     >
 
     <Button on:click={registerUser}>Sign Up</Button>
-</form>
+</main>
 
 <style>
     .register__header,
