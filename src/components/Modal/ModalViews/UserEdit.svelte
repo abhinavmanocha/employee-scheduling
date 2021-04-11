@@ -2,14 +2,28 @@
     import { Plane } from "svelte-loading-spinners";
 
     import Input from "../../Form/Input.svelte";
+    import Button from "../../Form/Button.svelte";
 
     export let props;
-    let data = {};
+
+    let data = {
+        img_url: "",
+        username: "",
+        email: "",
+        name: "",
+        surname: "",
+        country: "",
+        education: "",
+    };
 
     // get list of all countries
-    const request = fetch(`https://schede.herokuapp.com/countries`).then((resp) =>
-        resp.json()
-    );
+    const request = fetch(
+        `https://schede.herokuapp.com/countries`
+    ).then((resp) => resp.json());
+
+    const updateUserInfo = () => {
+        console.log(data);
+    };
 </script>
 
 {#await request}
@@ -38,6 +52,7 @@
                                 <select
                                     name="country-select"
                                     id="country-select"
+                                    bind:value={data[key]}
                                 >
                                     {#each response as resp}
                                         {#if resp.id == val}
@@ -58,7 +73,7 @@
                                     label={val}
                                     id={key}
                                     placeholder={val}
-                                    bind:value={data.key}
+                                    bind:value={data[key]}
                                     type="text"
                                     autocomplete="on"
                                 />
@@ -66,6 +81,10 @@
                         </div>
                     {/if}
                 {/each}
+            </div>
+
+            <div>
+                <Button on:click={updateUserInfo}>Confirm</Button>
             </div>
         </div>
     </section>
@@ -87,7 +106,7 @@
 
     .user__details {
         margin: 0 auto;
-        padding: 1.5rem;
+        padding: 0 1.5rem;
         flex-basis: 100%;
     }
 

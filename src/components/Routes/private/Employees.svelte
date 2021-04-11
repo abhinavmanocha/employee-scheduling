@@ -4,7 +4,7 @@
 
     import { Plane } from "svelte-loading-spinners";
 
-    import NewUser from "../../Modal/ModalViews/NewUser.svelte";
+    import NewEmployee from "../../Modal/ModalViews/NewEmployee.svelte";
 
     const { open } = getContext("simple-modal");
 
@@ -39,7 +39,7 @@
     };
 
     const addNewEmployee = () => {
-        open(NewUser);
+        open(NewEmployee);
     };
 </script>
 
@@ -60,6 +60,9 @@
         </main>
     {:else if data != null}
         <main class="employees">
+            <button on:click={addNewEmployee} class="employee-add--bttn"
+                >Add new employee</button
+            >
             <Datatable {settings} {data}>
                 <thead class="sortable__head">
                     <th data-key="img">Img</th>
@@ -74,7 +77,7 @@
                         <tr>
                             <td>
                                 <img
-                                    src={row.img}
+                                    src={row.img || "/imgs/default.png"}
                                     alt={rows.name}
                                     class="data__cell-img"
                                 />
@@ -92,7 +95,9 @@
     {:else}
         <div class="employee-add">
             <h1>You don't have any employee yet 🤔</h1>
-            <button on:click={addNewEmployee} class="employee-add--bttn">Add new</button>
+            <button on:click={addNewEmployee} class="employee-add--bttn"
+                >Add new</button
+            >
         </div>
     {/if}
 {:catch error}
@@ -116,10 +121,15 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
         text-align: center;
         margin: 0;
         font-size: 2.5rem;
         color: #2196f3;
+    }
+
+    .error p {
+        margin: 0;
     }
 
     .employee-add {

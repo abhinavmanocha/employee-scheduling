@@ -2,8 +2,8 @@
     import calendarize from "calendarize";
     import Arrow from "./Arrow.svelte";
 
-    export let year = 2019;
-    export let month = 0;
+    export let year = new Date().getFullYear();
+    export let month = new Date().getMonth();
     export let offset = 0;
     export let today = null;
 

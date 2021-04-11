@@ -118,7 +118,13 @@
                                         <a
                                             class="info__data info__data--imgurl"
                                             href={val}
-                                            target="_blank">{val.length > 64 ? val.substring(val.lastIndexOf("//") + 2, val.lastIndexOf("/")) : val}</a
+                                            target="_blank"
+                                            >{val.length > 64
+                                                ? val.substring(
+                                                      val.lastIndexOf("//") + 2,
+                                                      val.lastIndexOf("/")
+                                                  )
+                                                : val}</a
                                         >
                                     </div>
                                 {:else}
@@ -155,10 +161,15 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
         text-align: center;
         margin: 0;
         font-size: 2.5rem;
         color: #2196f3;
+    }
+
+    .error p {
+        margin: 0;
     }
 
     .user {

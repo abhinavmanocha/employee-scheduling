@@ -11,7 +11,9 @@
     };
 
     const deleteSquad = (e, id) => {
-        if (confirm(`\nAre you sure you want to delete squad with id = ${id}`)) {
+        if (
+            confirm(`\nAre you sure you want to delete squad with id = ${id}`)
+        ) {
             fetch(`https://schede.herokuapp.com/squad/${id}`, {
                 method: "DELETE",
                 mode: "cors",
@@ -99,8 +101,8 @@
     let searchCriteria;
 
     const sort = () => {
-        
-    }
+        console.log("xD");
+    };
 </script>
 
 <svelte:head>
@@ -113,66 +115,58 @@
         <p>Fetching Data...</p>
     </main>
 {:then data}
-    {#if data.length < 1}
-        <main class="error">
-            <p>{data.error} 😥</p>
-            <p>{data.message}</p>
-        </main>
-    {:else}
-        <main class="squads">
-            <div class="squads__wrapper">
-                <header class="squads__header">
-                    <button class="cr__button cr__button--add" on:click={create}
-                        >Create new Squad</button
-                    >
-                    <input
-                        type="text"
-                        placeholder="Search by name..."
-                        on:change={() => {sort()}}
-                        bind:value={searchCriteria}
-                    />
-                </header>
-                <div class="table__wrapper">
-                    <table class="table">
-                        <thead class="table__header">
-                            <tr class="table__header--row">
-                                <th>Id</th>
-                                <th>Squad Name</th>
-                                <th>Department</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table__body">
-                            {#each data as squad}
-                                <tr class="table__data--row">
-                                    <td class="squad__id">{squad.id}</td>
-                                    <td class="squad__name"
-                                        >{squad.squad_name}</td
+    <main class="squads">
+        <div class="squads__wrapper">
+            <header class="squads__header">
+                <button class="cr__button cr__button--add" on:click={create}
+                    >Create new Squad</button
+                >
+                <input
+                    type="text"
+                    placeholder="Search by name..."
+                    on:change={() => {
+                        sort();
+                    }}
+                    bind:value={searchCriteria}
+                />
+            </header>
+            <div class="table__wrapper">
+                <table class="table">
+                    <thead class="table__header">
+                        <tr class="table__header--row">
+                            <th>Id</th>
+                            <th>Squad Name</th>
+                            <th>Department</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table__body">
+                        {#each data as squad}
+                            <tr class="table__data--row">
+                                <td class="squad__id">{squad.id}</td>
+                                <td class="squad__name">{squad.squad_name}</td>
+                                <td class="squad__dep">{squad.name}</td>
+                                <td class="operations">
+                                    <button
+                                        class="cr__button cr__button--edit"
+                                        on:click={(e) => {
+                                            updateSquad(e, squad);
+                                        }}>Edit</button
                                     >
-                                    <td class="squad__dep">{squad.name}</td>
-                                    <td class="operations">
-                                        <button
-                                            class="cr__button cr__button--edit"
-                                            on:click={(e) => {
-                                                updateSquad(e, squad);
-                                            }}
-                                            >Edit</button
-                                        >
-                                        <button
-                                            class="cr__button cr__button--delete"
-                                            on:click={(e) => {
-                                                deleteSquad(e, squad.id);
-                                            }}>Delete</button
-                                        >
-                                    </td>
-                                </tr>
-                            {/each}
-                        </tbody>
-                    </table>
-                </div>
+                                    <button
+                                        class="cr__button cr__button--delete"
+                                        on:click={(e) => {
+                                            deleteSquad(e, squad.id);
+                                        }}>Delete</button
+                                    >
+                                </td>
+                            </tr>
+                        {/each}
+                    </tbody>
+                </table>
             </div>
-        </main>
-    {/if}
+        </div>
+    </main>
 {/await}
 
 <style>

@@ -36,8 +36,6 @@
             }),
         });
 
-        console.log(body);
-
         const data = await response.json();
 
         registerSuccessful = data.statusCode === 201 ? true : false;
@@ -141,6 +139,6 @@
 
     .register__successfull {
         margin: 0 auto;
-        color: #2196f3;
+        color: #4caf50;
     }
 </style>
